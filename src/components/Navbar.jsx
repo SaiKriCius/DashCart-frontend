@@ -1,4 +1,5 @@
-import { ShoppingCart, LogIn, UserPlus, LogOut, Lock, Sun, Moon } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { ShoppingCart, LogIn, UserPlus, LogOut, Lock, Sun, Moon, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useUserStore } from "../stores/useUserStore";
 import { useCartStore } from "../stores/useCartStore";
@@ -9,6 +10,21 @@ const Navbar = () => {
     const isAdmin = user?.role === "admin";
     const { cart } = useCartStore();
     const { theme, toggleTheme } = useThemeStore();
+    
+    // Auth Dropdown State (Mobile)
+    const [isAuthMenuOpen, setIsAuthMenuOpen] = useState(false);
+    const authMenuRef = useRef(null);
+
+    // Close menu when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (authMenuRef.current && !authMenuRef.current.contains(event.target)) {
+                setIsAuthMenuOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     return (
         <header className="fixed top-0 left-0 w-full bg-bg-base z-50 border-b border-border-subtle transition-colors duration-300">
@@ -66,22 +82,40 @@ const Navbar = () => {
                                 </button>
                             </>
                         ) : (
-                            <>
-                                <Link
-                                    to="/login"
-                                    className="flex items-center gap-1.5 text-text-muted hover:text-text-main text-sm font-medium transition-colors"
+                            <div className="relative" ref={authMenuRef}>
+                                <button
+                                    onClick={() => setIsAuthMenuOpen(!isAuthMenuOpen)}
+                                    className={`p-2 rounded-full border transition-all shadow-sm ${
+                                        isAuthMenuOpen 
+                                            ? 'bg-primary/10 text-primary border-primary/30' 
+                                            : 'bg-surface text-text-muted border-border-subtle hover:text-primary hover:bg-surface-hover'
+                                    }`}
+                                    title="Account Options"
                                 >
-                                    <LogIn size={18} />
-                                    Login
-                                </Link>
-                                <Link
-                                    to="/signup"
-                                    className="flex items-center gap-1.5 bg-primary hover:bg-primary-dark text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-all active:scale-95 shadow-lg shadow-primary/20"
-                                >
-                                    <UserPlus size={18} />
-                                    Sign Up
-                                </Link>
-                            </>
+                                    <User size={20} />
+                                </button>
+
+                                {/* Dropdown Menu */}
+                                {isAuthMenuOpen && (
+                                    <div className="absolute top-full right-0 mt-3 w-40 bg-bg-base border border-border-subtle rounded-xl shadow-2xl overflow-hidden z-50">
+                                        <Link
+                                            to="/login"
+                                            onClick={() => setIsAuthMenuOpen(false)}
+                                            className="flex items-center gap-2.5 px-4 py-3 text-sm font-medium text-text-main hover:bg-surface-hover hover:text-primary transition-colors"
+                                        >
+                                            <LogIn size={16} className="text-text-muted" /> Login
+                                        </Link>
+                                        <div className="h-px w-full bg-border-subtle" />
+                                        <Link
+                                            to="/signup"
+                                            onClick={() => setIsAuthMenuOpen(false)}
+                                            className="flex items-center gap-2.5 px-4 py-3 text-sm font-medium text-text-main hover:bg-surface-hover hover:text-primary transition-colors"
+                                        >
+                                            <UserPlus size={16} className="text-primary" /> Sign Up
+                                        </Link>
+                                    </div>
+                                )}
+                            </div>
                         )}
                     </div>
                 </div>
