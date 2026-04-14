@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 const CategoryItem = ({ category }) => {
     return (
-        <div className="group rounded-2xl border border-border-subtle overflow-hidden bg-bg-surface shadow-lg transition-all duration-300 hover:shadow-primary/20 hover:border-primary/50 flex flex-col h-full">
+        <div className="group rounded-2xl border border-border-subtle overflow-hidden bg-bg-surface shadow-lg transition duration-300 hover:shadow-primary/20 hover:border-primary/50 flex flex-col h-full">
             <Link to={"/category" + category.href} className="flex flex-col h-full focus:outline-none">
                 
                 {/* TOP HALF: IMAGE */}
@@ -17,6 +17,7 @@ const CategoryItem = ({ category }) => {
                         alt={category.name}
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                         loading="lazy"
+                        decoding="async"
                     />
                 </div>
 

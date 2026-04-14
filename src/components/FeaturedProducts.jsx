@@ -86,7 +86,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
 
         <div className="relative">
           <div
-            className="overflow-hidden py-4 -my-4" /* Added py-4 so the card hover shadows don't get cut off */
+            className="overflow-hidden py-4 -my-4 touch-pan-y" /* Added touch-pan-y to fix scroll blocking */
             onTouchStart={isMobile ? onTouchStart : undefined}
             onTouchMove={isMobile ? onTouchMove : undefined}
             onTouchEnd={isMobile ? onTouchEnd : undefined}

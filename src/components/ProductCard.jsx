@@ -19,14 +19,15 @@ const ProductCard = ({ product }) => {
     };
 
     return (
-        <div className='flex w-full relative flex-col overflow-hidden rounded-xl border border-border-subtle bg-surface-hover shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-primary/20 hover:border-primary/30'>
+        <div className='flex w-full relative flex-col overflow-hidden rounded-xl border border-border-subtle bg-surface-hover shadow-lg transition-[box-shadow,border-color] duration-300 hover:shadow-primary/20 hover:border-primary/30'>
             {/* Image Container with Hover Zoom */}
             <div className='relative mx-3 mt-3 flex h-40 sm:h-48 lg:h-56 overflow-hidden rounded-lg group'>
                 <img 
                     className='object-cover w-full h-full transition-transform duration-500 group-hover:scale-110' 
                     src={product.image} 
                     alt={product.name} 
-                    loading="lazy" /* THIS FIXES YOUR SCROLL LAG */
+                    loading="lazy"
+                    decoding="async" /* THIS EXPLICITLY FIXES SCROLL DECODE STUTTER */
                 />
             </div>
 
