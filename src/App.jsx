@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
@@ -21,6 +21,11 @@ function App() {
     const { user, checkAuth, checkingAuth } = useUserStore();
     const { getCartItems } = useCartStore();
     const { initTheme } = useThemeStore();
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
     
     useEffect(() => {
         initTheme();
@@ -78,7 +83,7 @@ function App() {
     return (
         <div className="min-h-screen relative selection:bg-primary selection:text-text-main bg-bg-base text-text-main transition-colors duration-300">
             {/* Background gradient (using our new CSS variables) */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+            <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
                 <div 
                     className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[80vh] transition-all duration-300" 
                     style={{
