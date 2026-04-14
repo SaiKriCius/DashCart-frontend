@@ -6,9 +6,10 @@ import AdminPage from "./pages/AdminPage";
 import CategoryPage from "./pages/CategoryPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer"; // 1. Imported the Footer!
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import { useUserStore } from "./stores/useUserStore";
 import { useEffect } from "react";
+import axiosInstance from "./lib/axios";
 import LoadingSpinner from "./components/LoadingSpinner";
 import CartPage from "./pages/CartPage";
 import { useCartStore } from "./stores/useCartStore";
@@ -24,6 +25,43 @@ function App() {
     useEffect(() => {
         initTheme();
     }, [initTheme]);
+
+    useEffect(() => {
+        const wakeUpBackend = async () => {
+            let timeoutId;
+            let toastId;
+
+            const fetchPromise = axiosInstance.get("/health");
+
+            const timeoutPromise = new Promise((resolve) => {
+                timeoutId = setTimeout(() => {
+                    resolve("timeout");
+                }, 3000);
+            });
+
+            try {
+                const result = await Promise.race([fetchPromise, timeoutPromise]);
+
+                if (result === "timeout") {
+                    toastId = toast("Our database is waking up! Data will load in just a moment...", {
+                        icon: '🔄',
+                        duration: Infinity, 
+                    });
+                    
+                    // Wait for the actual fetch to finish
+                    await fetchPromise;
+                    toast.dismiss(toastId);
+                } else {
+                    clearTimeout(timeoutId);
+                }
+            } catch (error) {
+                clearTimeout(timeoutId);
+                if (toastId) toast.dismiss(toastId);
+            }
+        };
+
+        wakeUpBackend();
+    }, []);
 
     useEffect(() => {
         checkAuth();
