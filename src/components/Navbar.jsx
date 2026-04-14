@@ -11,7 +11,7 @@ const Navbar = () => {
     const { theme, toggleTheme } = useThemeStore();
 
     return (
-        <header className="fixed top-0 left-0 w-full bg-bg-surface backdrop-blur-lg z-50 border-b border-border-subtle transition-colors duration-300">
+        <header className="fixed top-0 left-0 w-full bg-bg-base z-50 border-b border-border-subtle transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 py-3 sm:py-4">
                 
                 {/* ================= MOBILE NAVBAR ================= */}

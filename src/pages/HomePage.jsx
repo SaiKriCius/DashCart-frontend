@@ -26,8 +26,8 @@ const HomePage = () => {
     fetchFeaturedProducts();
   }, [fetchFeaturedProducts]);
 
-  return (
-    <div className="relative min-h-screen text-text-main overflow-hidden">
+    return (
+    <div className="relative min-h-screen text-text-main">
       
       {/* HERO SECTION - Upgraded for a premium feel */}
       <section className="pt-12 sm:pt-20 pb-12 text-center px-4 max-w-4xl mx-auto">        

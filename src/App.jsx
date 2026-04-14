@@ -85,7 +85,7 @@ function App() {
             {/* Background gradient (using our new CSS variables) */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
                 <div 
-                    className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[80vh] transition-all duration-300" 
+                    className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[80vh] transition-colors duration-300" 
                     style={{
                         background: 'radial-gradient(ellipse at top, var(--color-glow-start) 0%, var(--color-glow-mid) 45%, transparent 100%)'
                     }}

@@ -19,7 +19,7 @@ const CategoryPage = () => {
         return (
             // Swapped the plain text for your actual loading component, centered beautifully
             <div className="grow flex items-center justify-center min-h-[60vh]">
-                <LoadingSpinner />
+                <LoadingSpinner fullScreen={false} />
             </div>
         );
     }
