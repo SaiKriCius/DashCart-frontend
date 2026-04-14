@@ -6,7 +6,7 @@ const LoadingSpinner = ({ fullScreen = true }) => {
             <div className='w-16 h-16 sm:w-20 sm:h-20 border-4 border-white/5 rounded-full' />
             
             {/* Spinning brand color with a glow */}
-            <div className='absolute left-0 top-0 w-16 h-16 sm:w-20 sm:h-20 border-4 border-primary border-t-transparent border-l-transparent animate-spin rounded-full drop-shadow-[0_0_12px_rgba(99,102,241,0.5)]' />
+            <div className='absolute left-0 top-0 w-16 h-16 sm:w-20 sm:h-20 border-4 border-primary border-t-transparent border-l-transparent animate-spin rounded-full shadow-[0_0_15px_rgba(99,102,241,0.4)]' />
             
             <div className='sr-only'>Loading</div>
         </div>
