@@ -44,8 +44,22 @@ body {
   --color-border-subtle: rgba(0, 0, 0, 0.1); /* Darker borders */
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-bg-base);
   color: var(--color-text-main);
   transition: background-color 0.3s ease, color 0.3s ease; /* Smooth fade! */
+}
+
+/* Shimmer animation for gradient text in hero */
+@keyframes shimmer {
+  0%, 100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
 }
